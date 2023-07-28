@@ -1,5 +1,4 @@
-# vue-training
-
+n1k0nss vue project
 ## Project setup
 ```
 npm install
