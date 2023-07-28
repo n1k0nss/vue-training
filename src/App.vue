@@ -1,149 +1,100 @@
 <template>
-   <div class="users">
-      <div class="users__text">
-          Кількість користувачів: <span class="users__count" :class="{'users__count-active' : usersCount != 0}">{{ usersCount }}</span>
-      </div>
-      <div class="users__buttons">
-          <default-button
-                  @click="addUser">
-              Додати користувача
-          </default-button>
-          <default-button
-                  @click="removeUser">
-              Видалити користувача
-          </default-button>
-      </div>
+   <div class="todo">
+      <todo-header
+          :task-count="tasksCounter"
+      />
    </div>
 
+   <task-list  :tasks="tasks"></task-list>
 </template>
 
 <script>
-   import DefaultButton from "@/components/ui/DefaultButton";
+
+   import TodoHeader from "@/components/TodoHeader.vue";
+   import TaskItem from "@/components/TaskItem.vue";
+   import TaskList from "@/components/TaskList.vue";
 
    export default {
-       components: {DefaultButton},
+      components: { TodoHeader, TaskItem, TaskList},
       data ()  {
          return {
-            usersCount: 3,
+            tasksCounter: 0,
+            tasks: [
+               {
+                  "userId": 1,
+                  "id": 1,
+                  "title": "delectus aut autem",
+                  "completed": false
+               },
+               {
+                  "userId": 2,
+                  "id": 2,
+                  "title": "quis ut nam facilis et officia qui",
+                  "completed": false
+               },
+               {
+                  "userId": 3,
+                  "id": 3,
+                  "title": "fugiat veniam minus",
+                  "completed": true
+               },
+               {
+                  "userId": 4,
+                  "id": 4,
+                  "title": "et porro tempora",
+                  "completed": true
+               },
+
+            ]
          }
       },
       created() {
+         this.tasksCounter = this.tasks.length;
       },
 
       mounted() {
+         this.$root.$on('createTask', (task) => {
+            this.tasks.push(task);
+         })
       },
-      methods: {
-         addUser() {
-            if(this.usersCount >= 0) this.usersCount++;
 
-         },
-         removeUser() {
-            if(this.usersCount > 0) this.usersCount--;
-         }
-      }
+      methods: {
+      },
 
    }
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 *,
 *::before,
 *::after {
    box-sizing: border-box;
    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-html,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-address,
-small,
-strong,
-ol,
-ul,
-form,
-button,
-label,
-caption,
-article,
-aside,
-details,
-figure,
-figcaption,
-nav,
-time {
    margin: 0;
    padding: 0;
 }
-
-blockquote,
-q {
-   quotes: none;
-}
-
-table {
-   border-collapse: collapse;
-   border-spacing: 0;
-}
-
-button {
-   outline: none;
-   border: none;
-   cursor: pointer;
-}
-
-input,
-textarea {
-   outline: none;
-   border-radius: 0;
-   border: none;
-   box-shadow: none;
-   &::placeholder {
-      opacity: 1;
-   }
-}
-
-a:not([class]) {
-   text-decoration-skip-ink: auto;
-}
-
-img {
-   max-width: 100%;
-   display: block;
-}
-
-input,
-button,
-textarea,
-select {
-   font: inherit;
-}
-
-ul,
-ol {
-   list-style: none;
-   padding: 0;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
    margin: 0;
 }
-
-a {
+a{
    text-decoration: none;
-   &:focus {
-      text-decoration: none;
-      outline: none;
-   }
+}
+img{
+   width: 100%;
+   height: 100%;
+}
+*:focus{
+   outline: none;
 }
 
 body{
    padding: 20px;
+   font-family: 'Montserrat', sans-serif;
 }
-.users{
+.todo{
     display: flex;
     align-items: center;
     gap: 10px;
@@ -152,28 +103,7 @@ body{
     border: 1px solid #b0b0b0;
     border-radius: 10px;
 }
-.users__text{
-   font-size: 40px;
-}
-.users__count{
-   font-size: 60px;
-   color: red;
-}
-.users__count-active{
-   color: green;
-}
-.users__buttons{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.users__button{
-    background-color: transparent;
-    color: cyan;
-    padding: 10px 20px;
-    font-size: 24px;
-    border: 2px solid cyan;
-    border-radius: 5px;
-}
+
+
 </style>
 
