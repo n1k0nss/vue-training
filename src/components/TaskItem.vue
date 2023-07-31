@@ -1,9 +1,9 @@
 <template>
     <div class="task">
         <div class="task__data">
-            <span class="task__user">User: {{task.userId}}</span>
-            <span class="task__title">{{task.title}}</span>
-            <span class="task__title">Id = {{task.id}}</span>
+            <span class="task__user">User: {{this.task.userId}}</span>
+            <span class="task__title">{{this.task.title}}</span>
+            <span class="task__title">Id = {{this.task.id}}</span>
         </div>
         <div class="task__actions">
             <default-button class="task__button">

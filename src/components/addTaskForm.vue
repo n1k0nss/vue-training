@@ -3,15 +3,14 @@
         <form class="task-form" @submit.prevent>
             <span class="task-form__title"><slot name="title"></slot></span>
             <div class="task-form__inputs">
-                <input v-model="this.task.userId" class="task-form__input" type="number" placeholder="User id">
-                <input v-model="this.task.title" class="task-form__input" type="text" placeholder="Task title">
+                <input v-model="this.post.userId" class="task-form__input" type="number" placeholder="User id">
+                <input v-model="this.post.title" class="task-form__input" type="text" placeholder="Task title">
                 <label  class="task-form__label" for="checkbox">
-                    <input v-model="this.task.completed" id="checkbox" type="checkbox">
+                    <input v-model="this.post.completed" id="checkbox" type="checkbox">
                     Task completed
                 </label>
             </div>
             <default-button
-                @click="addTask"
             >
                 Add
             </default-button>
@@ -25,22 +24,14 @@ export default {
     name: 'addTaskForm',
     data () {
         return {
-            task: {
-                userId: null,
-                title: '',
-                completed: false,
-            },
+          post: {
+            userId: null,
+            title: '',
+            completed: false,
+          }
 
         }
     },
-    created() {
-    this.task.id = Date.now()
-    },
-    methods: {
-        addTask() {
-            this.$root.$emit('createTask', this.task)
-        }
-    }
 
 }
 </script>

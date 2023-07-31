@@ -5,7 +5,7 @@
       />
    </div>
 
-   <task-list  :tasks="tasks"></task-list>
+   <task-list :tasks="tasks"></task-list>
 </template>
 
 <script>
@@ -18,47 +18,11 @@
       components: { TodoHeader, TaskItem, TaskList},
       data ()  {
          return {
-            tasksCounter: 0,
-            tasks: [
-               {
-                  "userId": 1,
-                  "id": 1,
-                  "title": "delectus aut autem",
-                  "completed": false
-               },
-               {
-                  "userId": 2,
-                  "id": 2,
-                  "title": "quis ut nam facilis et officia qui",
-                  "completed": false
-               },
-               {
-                  "userId": 3,
-                  "id": 3,
-                  "title": "fugiat veniam minus",
-                  "completed": true
-               },
-               {
-                  "userId": 4,
-                  "id": 4,
-                  "title": "et porro tempora",
-                  "completed": true
-               },
 
-            ]
          }
       },
       created() {
          this.tasksCounter = this.tasks.length;
-      },
-
-      mounted() {
-         this.$root.$on('createTask', (task) => {
-            this.tasks.push(task);
-         })
-      },
-
-      methods: {
       },
 
    }
